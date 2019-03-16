@@ -1,0 +1,69 @@
+{% extends 'cataps/base.html' %}
+
+{% load static %}
+
+{% block page_content %}
+<div class="container-fluid">
+    <ul class="list-unstyled">
+        <li>{</li>
+            <li><ul class="list-unstyled">
+                    <li>"id": {{ category.id }},</li>
+                    <li>"name": {{ category.name }},</li>
+                    {% if parents %}
+                        <li>"parents": [</li>
+                        <div class="container-fluid row">
+                            <div class="col-1 col-md-1"></div>
+                            <div class="col-11 col-md-11">
+                                <ul class="list-unstyled">
+                                {% for parent in parents %}
+                                    <li>{</li>
+                                    <li>"id": {{ parent.id }}</li>
+                                    <li>"name": {{ parent.name }}</li>
+                                    <li>},</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <li>],</li>
+                    {% endif %}
+                    {% if children %}
+                        <li>"children": [</li>
+                        <div class="container-fluid row">
+                            <div class="col-1 col-md-1"></div>
+                            <div class="col-11 col-md-11">
+                                <ul class="list-unstyled">
+                                {% for child in children %}
+                                    <li>{</li>
+                                    <li>"id": {{ child.id }}</li>
+                                    <li>"name": {{ child.name }}</li>
+                                    <li>},</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <li>],</li>
+                    {% endif %}
+                    {% if sibblings %}
+                        <li>"sibblings": [</li>
+                        <div class="container-fluid row">
+                            <div class="col-1 col-md-1"></div>
+                            <div class="col-11 col-md-11">
+                                <ul class="list-unstyled">
+                                {% for parent in parents %}
+                                    <li>{</li>
+                                    <li>"id": {{ parent.id }}</li>
+                                    <li>"name": {{ parent.name }}</li>
+                                    <li>},</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <li>],</li>
+                    {% endif %}
+                </ul>
+            </li>
+        <li>}</li>
+    </ul>
+
+
+{% endblock %}
